@@ -1,0 +1,55 @@
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+
+  // perform API request and obtain the response data
+
+  const apiResponse = { data: 'API response data' };
+
+  // encode the response data in a non-readable format such as Base64
+
+  const encodedResponse = Buffer.from(JSON.stringify(apiResponse)).toString('base64');
+
+  // send only the encoded response data to the client-side
+
+  res.end(`<html><body><script>const apiResponse = JSON.parse(atob('${encodedResponse}'));</script></body></html>`);
+
+});
+
+server.listen(3000, () => {
+
+  console.log('Server running at http://localhost:3000/');
+
+});
+
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+
+  // perform API request and obtain the response data
+
+  const apiResponse = { data: 'API response data' };
+
+  // encode the response data in a non-readable format such as Base64
+
+  const encodedResponse = Buffer.from(JSON.stringify(apiResponse)).toString('base64');
+
+  // set response headers to prevent caching
+
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+
+  res.setHeader('Pragma', 'no-cache');
+
+  res.setHeader('Expires', '0');
+
+  // send only the encoded response data to the client-side
+
+  res.end(`<html><body><script>const apiResponse = JSON.parse(atob('${encodedResponse}'));</script></body></html>`);
+
+});
+
+server.listen(3000, () => {
+
+  console.log('Server running at http://localhost:3000/');
+
+});
